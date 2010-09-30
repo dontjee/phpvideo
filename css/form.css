@@ -1,0 +1,56 @@
+fieldset{
+	margin: 1em 1.5em;
+	border: 0 none;
+	border-bottom:1px solid gray;
+}
+legend{
+	font-size: 1.5em;
+}
+.forminput{
+	margin-bottom: 0.2em;
+	padding-top: 10px;
+	position: relative;
+	clear:both;
+}
+
+.formfield{
+	float:left;
+	margin-right:0.3em;
+}
+
+.formfieldlower{
+	margin-left: 5%;
+	clear:left;
+}
+
+.formlabel{
+	float:left;
+	padding: 0.2em 0.54em 0 0;
+	text-align: right;
+	width:10%;
+}
+
+.return{
+	position:relative;
+}
+	/*only on the register.php page */
+	.return #submit{
+		left:40em;
+		position:relative;
+	}
+/*only on the main.php page*/
+#login{
+	left:7.5em;
+	position:relative;
+}
+
+/*only on the useredit.php page*/
+.return #submitedit{
+	left:7.5em;
+	position:relative;
+}
+
+label.error, span.error {
+	color:red;
+	font-weight: bold;
+}

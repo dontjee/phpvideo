@@ -1,0 +1,192 @@
+body {
+	font: 78%/1.5 arial, helvetica, serif;
+	text-align: center;
+	padding: 0;
+	margin: 2em;
+}
+
+.pquote {
+	float: left;
+	width: 24em;
+	background: #fff;
+	font-weight: bold;
+	text-align: left;
+	padding: 2em;
+	margin: 0;
+}
+
+
+#container {
+	width: 75em;
+	background: #fff;
+	text-align: left;
+	border: 2px solid #024175;
+	margin: 0 auto;
+}
+
+p {
+	margin: 1em 2em;
+}
+
+p#smurf {
+	background: transparent;
+	font-style: italic;
+	text-align: center;
+	font-weight: bold;
+	color: #0078d0;
+}
+
+#smurf strong {
+	font-size: 1.2em;
+	color: black;
+}
+
+h1#logo {
+	height: 105px;
+	background: url(http://www.connectedmath.msu.edu/test/img/header2.jpg) no-repeat;
+	text-indent: -999em;
+	margin: 0em 0 0 0;
+}
+
+h2 {
+	margin: 1em 1.3em;
+}
+
+#nav, #nav ul {
+	float: left;
+	width: 75em;
+	list-style: none;
+	line-height: 1;
+	background: #024175;
+	font-weight: bold;
+	padding: 0;
+	border: solid #024175;
+	border-width: 2px 0;
+	margin: 0 0 1em 0;
+}
+
+#nav a {
+	display: block;
+	width: 8em;
+	w\idth: 4em;
+	color: #fff;
+	text-decoration: none;
+	padding: 0.25em 2em;
+}
+
+#nav a.daddy {
+	background: url(http://www.connectedmath.msu.edu/img/arrow.gif) center right no-repeat;
+}
+
+#nav li {
+	float: left;
+	padding: 0;
+	width: 8em;
+}
+
+#nav li ul {
+	position: absolute;
+	left: -999em;
+	height: auto;
+	width: 14.4em;
+	w\idth: 13.9em;
+	font-weight: normal;
+	border-width: 0.25em;
+	margin: 0;
+}
+
+#nav li li {
+	padding-right: 1em;
+	width: 13em
+}
+
+#nav li ul a {
+	width: 13em;
+	w\idth: 9em;
+}
+
+#nav li ul ul {
+	margin: -1.75em 0 0 14em;
+}
+
+#nav li:hover ul ul, #nav li:hover ul ul ul, #nav li.sfhover ul ul, #nav li.sfhover ul ul ul {
+	left: -999em;
+}
+
+#nav li:hover ul, #nav li li:hover ul, #nav li li li:hover ul, #nav li.sfhover ul, #nav li li.sfhover ul, #nav li li li.sfhover ul {
+	left: auto;
+}
+
+#nav li:hover, #nav li.sfhover {
+	font-weight: bold;
+}
+
+#content {
+	clear: left;
+}
+
+#content a {
+	color: #0078d0;
+}
+
+#content a:hover {
+	text-decoration: none;
+}
+a:link {
+	color: #0078d0;
+	text-decoration: underline;
+}
+a:visited {
+	color: #0078d0;
+	text-decoration: underline;
+}
+a:hover {
+	color: #0078d0;
+	text-decoration: none;
+}
+a:active {
+	color: #0078d0;
+	text-decoration: underline;
+}
+
+div#news {
+	background: #024175;
+	color: #fff;
+}
+
+.spiffy{display:block}
+.spiffy *{
+  display:block;
+  height:1px;
+  overflow:hidden;
+  font-size:.01em;
+  background:#024175}
+.spiffy1{
+  margin-left:3px;
+  margin-right:3px;
+  padding-left:1px;
+  padding-right:1px;
+  border-left:1px solid #92adc3;
+  border-right:1px solid #92adc3;
+  background:#417097}
+.spiffy2{
+  margin-left:1px;
+  margin-right:1px;
+  padding-right:1px;
+  padding-left:1px;
+  border-left:1px solid #e5ecf1;
+  border-right:1px solid #e5ecf1;
+  background:#32658f}
+.spiffy3{
+  margin-left:1px;
+  margin-right:1px;
+  border-left:1px solid #32658f;
+  border-right:1px solid #32658f;}
+.spiffy4{
+  border-left:1px solid #92adc3;
+  border-right:1px solid #92adc3}
+.spiffy5{
+  border-left:1px solid #417097;
+  border-right:1px solid #417097}
+.spiffyfg{
+  background:#024175}

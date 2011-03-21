@@ -162,23 +162,16 @@ class MySQLDB
     * Returns true on success, false otherwise.
     */
    function addNewUser($username, $password, $email, $firstname, $lastname, 
-   $homecity, $homestate, $homezip, $workname, $schtype, 
-   $workcity, $workstate, $workzip, $profession, $purpose){
+   $workname, $workcity, $workstate, $profession){
    
       $username = mysql_real_escape_string($username);
    	  $email = mysql_real_escape_string($email);
       $firstname = mysql_real_escape_string($firstname);
       $lastname = mysql_real_escape_string($lastname);
-      $homecity = mysql_real_escape_string($homecity);
-      $homestate = mysql_real_escape_string($homestate);
-      $homezip = mysql_real_escape_string($homezip);
       $workname = mysql_real_escape_string($workname);
-      $schtype = mysql_real_escape_string($schtype);
       $workcity = mysql_real_escape_string($workcity);
       $workstate = mysql_real_escape_string($workstate);
-      $workzip = mysql_real_escape_string($workzip);
       $profession = mysql_real_escape_string($profession);
-      $purpose = mysql_real_escape_string($purpose);
  
       $time = time();
       /* If admin sign up, give admin user level */
@@ -203,15 +196,14 @@ class MySQLDB
       	
       	$userid = mysql_result($result, 0);
       	
-      	$q = "INSERT INTO ".TBL_PROFILE." VALUES ( '$userid', '$firstname', '$lastname', '$homecity', '$homestate', $homezip,".
-      		"'$workname', '$schtype', '$workcity', '$workstate', $workzip)";
+      	$q = "INSERT INTO ".TBL_PROFILE." VALUES ( '$userid', '$firstname', '$lastname',".
+      		"'$workname', '$workcity', '$workstate')";
       	//if the profile information was inserted
       	if(mysql_query($q, $this->connection) ){
       		$qprof = "INSERT INTO ".TBL_PROFESSION." VALUES ( '$userid', '$profession')";
-      		$qpurp = "INSERT INTO ".TBL_PURPOSE." VALUES ( '$userid', '$purpose')";
       		
       		//insert the last profession and purpose into the proper tables, and return the result
-      		return( mysql_query($qprof, $this->connection) && mysql_query($qpurp, $this->connection) );
+      		return( mysql_query($qprof, $this->connection) );
       	}
       	else{
       		return false;
@@ -302,9 +294,9 @@ class MySQLDB
     */
    function getUserInfo($username){
       //$q = "SELECT * FROM ".TBL_USERS." WHERE username = '$username'";
-      $q = "SELECT * FROM ".TBL_USERS." JOIN ".TBL_PROFILE." JOIN ".TBL_PROFESSION." JOIN ".TBL_PURPOSE." ON "
+      $q = "SELECT * FROM ".TBL_USERS." JOIN ".TBL_PROFILE." JOIN ".TBL_PROFESSION." ON "
    		.TBL_USERS.".userid = ".TBL_PROFILE.".userid AND ".TBL_USERS.".userid = ".TBL_PROFESSION.".userid"
-   		." AND ".TBL_USERS.".userid = ".TBL_PURPOSE.".userid WHERE username = '$username'";
+   		." WHERE username = '$username'";
 
       $result = mysql_query($q, $this->connection);
       /* Error occurred, return given name by default */

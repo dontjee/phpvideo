@@ -11,7 +11,7 @@
 <body>
 <p>
 
-Connected Mathematics Project © 2009 Michigan State University<br />
+Connected Mathematics Project &copy; 2009 Michigan State University<br />
 This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/2.5/">Creative Commons Attribution-NonCommercial-NoDerivs 2.5 License</a></p>
 
 

@@ -273,7 +273,7 @@ class Session
 		 $field = "user";
 		$form->setError($field, "* Username not yet approved");
       }
-      
+
       /* Return if form errors exist */
       if($form->num_errors > 0){
          return false;
@@ -350,9 +350,8 @@ class Session
     * 1. If no errors were found, it registers the new user and
     * returns 0. Returns 2 if registration failed.
     */
-   function register($subuser, $subemail, $subfirstname, $sublastname, 
-      		$subhomecity, $subhomestate, $subhomezip, $subworkname, $subschtype, 
-      		$subworkcity, $subworkstate, $subworkzip, $subprof, $subpurpose){
+   function register($subuser, $subpass, $subpassdup, $subemail, $subfirstname, $sublastname, 
+      		$subworkname, $subworkcity, $subworkstate, $subprof){
       		
       global $database, $form, $mailer;  //The database, form and mailer object
       
@@ -388,20 +387,25 @@ class Session
 			 }
 		  }
 
-      /* //Password error checking 
+      //Password error checking 
       $field = "pass";  //Use field name for password
-      if(!$subpass){
+      if(!$subpass || !$subpassdup){
          $form->setError($field, "* Password not entered");
       }
       else{
          //Spruce up password and check length
          $subpass = stripslashes($subpass);
-         if(strlen($subpass) < 4){
+         $subpassdup = stripslashes($subpassdup);
+         if(strlen($subpass) < 6){
             $form->setError($field, "* Password too short");
          }
          // Check if password is not alphanumeric
          else if(!eregi("^([0-9a-z])+$", ($subpass = trim($subpass)))){
             $form->setError($field, "* Password not alphanumeric");
+         }
+         // verify pass and duplicate pass match
+         else if($subpass != $subpassdup){
+            $form->setError("passdup", "* Passwords do not match");
          }
          /**
           * Note: I trimmed the password only after I checked the length
@@ -409,7 +413,7 @@ class Session
           * it looks like a lot more characters than 4, so it looks
           * kind of stupid to report "password too short".
           */
-//      }
+      }
       
       /* Email error checking */
 		  $field = "email";  //Use field name for email
@@ -450,31 +454,8 @@ class Session
 			 }
 		  }
 
-	  /*Home error checking*/
-		  $field = "homecity"; //Use field name for lastname
-		  if(!$subhomecity || strlen($subhomecity = trim($subhomecity)) == 0){
-			 $form->setError($field, "* Home city not entered");
-		  }
-		  else{
-			 /* Check if city name consists of only letters */
-			 if(!eregi("^([a-zA-Z' ])+$", $subhomecity)){
-				$form->setError($field, "* City name can use only letters");
-			 }
-		  }
-      
-		  $field = "homezip"; //Use field name for lastname
-		  if(!$subhomezip || strlen($subhomezip = trim($subhomezip)) == 0){
-			 $form->setError($field, "* Home zipcode not entered");
-		  }
-		  else{
-			 /* Check if zipcode consists of only numbers */
-			 if(!eregi("^[0-9]{5}$", $subhomezip)){
-				$form->setError($field, "* Home zipcode is invalid");
-			 }
-		  }
-	  
 	  /*Work error checking */
-	  	  $field = "workname"; //Use field name for firstname
+	  	  $field = "institutionname"; //Use field name for firstname
 		  if(!$subworkname || strlen($subworkname = trim($subworkname)) == 0){
 			 $form->setError($field, "* Work name not entered");
 		  }
@@ -494,17 +475,6 @@ class Session
 				$form->setError($field, "* Work name can use only letters");
 			 }
 		  }
-		  
-		  $field = "workzip"; //Use field name for workzip
-		  if(!$subworkzip || strlen($subworkzip = trim($subworkzip)) == 0){
-			 $form->setError($field, "* Work zipcode not entered");
-		  }
-		  else{
-			 /* Check if zipcode consists of only numbers */
-			 if(!eregi("^[0-9]{5}$", $subworkzip)){
-				$form->setError($field, "* Work zipcode is invalid");
-			 }
-		  }
       
       /* Errors exist, have user correct them */
       if($form->num_errors > 0){
@@ -512,12 +482,8 @@ class Session
       }
       /* No errors, add the new account to the database*/
       else{
-      	 /*Generate a random password for the new user */
-      	 $subpass = $this->generateRandStr(8);
-      	 
          if($database->addNewUser($subuser, md5($subpass), $subemail, $subfirstname, $sublastname, 
-      	 $subhomecity, $subhomestate, $subhomezip, $subworkname, $subschtype, 
-      	 $subworkcity, $subworkstate, $subworkzip, $subprof, $subpurpose)){
+      	 $subworkname, $subworkcity, $subworkstate, $subprof)){
             if(EMAIL_WELCOME){
                $mailer->sendWelcome($subfirstname, $sublastname, $subuser,$subemail,$subpass);
             }

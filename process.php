@@ -62,7 +62,20 @@ class Process
       global $session, $form;
       /* Login attempt */
       $retval = $session->login($_POST['user'], $_POST['pass'], isset($_POST['remember']));
-      
+
+/*if( $retval ){
+echo 'login was successful';
+echo $_SESSION['sessid'];
+}
+
+if( $session->logged_in ){
+echo 'logged in';
+}
+else{
+echo 'session says not logged in';
+}
+return;*/
+
       /* Login successful */
       if($retval){
 		/*
@@ -158,19 +171,6 @@ class Process
       }
       
       /*iterate through checkbox lists, combining them into one comma separated string */
-	  $subschtypefull = "";
-      if( isset($_POST['schtype']) ){
-		  $subschtype = $_POST['schtype'];
-
-		  //if the checkboxlist isn't null
-		  if(!is_null($subschtype)) {
-			  for($i=0; $i < count($subschtype); $i++)
-			  {
-				 $subschtypefull .= $subschtype[$i].",";
-			  }
-		  }
-	  }
-	  
 	  $subproffull = "";
 	  if( isset( $_POST['prof'] ) ){
 		  $subprof = $_POST['prof'];
@@ -190,35 +190,12 @@ class Process
 		   
 	   }
 	  
-      $subpurposefull = "";
-	  if( isset($_POST['purpose']) ){
-		  $subpurpose = $_POST['purpose'];
-		  //if the checkboxlist isn't null
-		  if(!is_null($subpurpose)) {
-			  for($i=0; $i < count($subpurpose); $i++)
-			  {
-			  	 // add "other" boxes if they were selected
-			     if( $subpurpose[$i] == "othr1" ){
-				    $subpurposefull .= $_POST["otherexp1"].",";
-			     }
-			     else if( $subpurpose[$i] == "othr2" ){
-				    $subpurposefull .= $_POST["otherexp2"].",";
-			     }
-			     else if( $subpurpose[$i] == "othr3" ){
-				    $subpurposefull .= $_POST["otherexp3"].",";
-			  	 }
-			  	 else {
-					 $subpurposefull .= $subpurpose[$i].",";
-				 }
-			  }
-		   }
-       }
       /* Registration attempt. Calls the register function in include/session.php */
       /* Each $_POST value is a normal input except for schtype, prof, and purpose. */
       /* Each one of those is an array of checkboxes							  */
-      $retval = $session->register($_POST['user'], $_POST['email'], $_POST['firstname'], $_POST['lastname'], 
-      		$_POST['homecity'], $_POST['homestate'], $_POST['homezip'], $_POST['workname'], $subschtypefull, 
-      		$_POST['workcity'], $_POST['workstate'], $_POST['workzip'], $subproffull, $subpurposefull);
+      $retval = $session->register($_POST['user'], $_POST['password'], $_POST['passworddup'], $_POST['email'],
+                $_POST['firstname'], $_POST['lastname'],
+                $_POST['institutionname'], $_POST['institutioncity'], $_POST['institutionstate'], $subproffull);
       
       /* Registration Successful */
       if($retval == 0){

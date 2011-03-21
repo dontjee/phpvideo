@@ -40,14 +40,10 @@ CREATE TABLE profiles (
   userid bigint primary key not null,
   firstname varchar(32),
   lastname varchar(32),
-  homecity varchar(32),
-  homestate varchar(2),
-  homezip int(5),
   workname varchar(50),
   workschool varchar(15),
   workcity varchar(32),
-  workstate varchar(2),
-  workzip int(5)
+  workstate varchar(2)
 );
 
 #
@@ -59,17 +55,6 @@ DROP TABLE IF EXISTS profession;
 CREATE TABLE profession (
   userid bigint primary key not null,
   job varchar(200)
-);
-
-#
-#  Table structure for purpose table
-#
-# *reason is a semicolon separated list of reasons for viewing
-DROP TABLE IF EXISTS purpose;
-
-CREATE TABLE purpose (
-  userid bigint primary key not null,
-  reason varchar(200)
 );
 
 #

@@ -28,7 +28,8 @@ CREATE TABLE users (
  userlevel tinyint(1) unsigned not null,
  email varchar(50),
  timestamp int(11) unsigned not null,
- approved boolean not null default true
+ approved boolean not null default true,
+ confirmcode varchar(32) null
 );
 
 #

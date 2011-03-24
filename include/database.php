@@ -162,7 +162,7 @@ class MySQLDB
     * Returns true on success, false otherwise.
     */
    function addNewUser($username, $password, $email, $firstname, $lastname, 
-   $workname, $workcity, $workstate, $profession){
+   $workname, $workcity, $workstate, $profession, $confirmCode){
    
       $username = mysql_real_escape_string($username);
    	  $email = mysql_real_escape_string($email);
@@ -172,6 +172,7 @@ class MySQLDB
       $workcity = mysql_real_escape_string($workcity);
       $workstate = mysql_real_escape_string($workstate);
       $profession = mysql_real_escape_string($profession);
+      $confirmCode = mysql_real_escape_string($confirmCode);
  
       $time = time();
       /* If admin sign up, give admin user level */
@@ -180,7 +181,7 @@ class MySQLDB
       }else{
          $ulevel = USER_LEVEL;
       }
-      $q = "INSERT INTO ".TBL_USERS." VALUES ( 'NULL', '$username', '$password', '0', $ulevel, '$email', $time, 1)";
+      $q = "INSERT INTO ".TBL_USERS." VALUES ( 'NULL', '$username', '$password', '0', $ulevel, '$email', $time, 0, '$confirmCode')";
       //return mysql_query($q, $this->connection);
       
       //if new user was created
@@ -212,6 +213,20 @@ class MySQLDB
       else{
       	return false;
       }
+   }
+
+   function confirmUser($code){
+      if(!get_magic_quotes_gpc()){
+         $code = mysql_real_escape_string($code);
+      }
+      $q = "SELECT username FROM ".TBL_USERS." WHERE confirmcode = '$code'";
+      $result = mysql_query($q, $this->connection);
+      if (mysql_numrows($result) > 0)
+      {
+         $q = "UPDATE ".TBL_USERS." SET approved = 1 WHERE confirmcode = '$code'";
+         return mysql_query($q, $this->connection);
+      }
+      return false;
    }
    
    /**

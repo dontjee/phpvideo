@@ -271,7 +271,7 @@ class Session
 
 	  if( !$database->usernameApproved($subuser) ){
 		 $field = "user";
-		$form->setError($field, "* Username not yet approved");
+		$form->setError($field, "* Username not yet confirmed. Check you email for a confirmation, and follow the link contained in it to complete your registration.");
       }
 
       /* Return if form errors exist */
@@ -287,6 +287,7 @@ class Session
       
       /* Insert sessid into database and update active users table */
       $database->updateUserField($this->username, "sessid", $this->sessid);
+      $database->updateUserField($this->username, "logins", $this->userinfo['logins'] + 1);
       $database->addActiveUser($this->username, $this->time);
       $database->removeActiveGuest($_SERVER['REMOTE_ADDR']);
 
@@ -482,16 +483,23 @@ class Session
       }
       /* No errors, add the new account to the database*/
       else{
+         $confirmCode = $this->generateRandStr(32);
          if($database->addNewUser($subuser, md5($subpass), $subemail, $subfirstname, $sublastname, 
-      	 $subworkname, $subworkcity, $subworkstate, $subprof)){
+      	 $subworkname, $subworkcity, $subworkstate, $subprof, $confirmCode)){
             if(EMAIL_WELCOME){
-               $mailer->sendWelcome($subfirstname, $sublastname, $subuser,$subemail,$subpass);
+               $mailer->sendWelcome($subfirstname, $sublastname, $subuser,$subemail,$confirmCode);
             }
             return 0;  //New user added succesfully
          }else{
             return 2;  //Registration attempt failed
          }
       }
+   }
+
+   function confirmUser($code)
+   {
+      global $database;  //The database and form object
+      return $database->confirmUser($code);
    }
    
    /**

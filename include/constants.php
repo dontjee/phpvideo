@@ -16,10 +16,10 @@
  * to the MySQL database. Make sure the information is
  * correct.
  */
-define("DB_SERVER", "**********");
-define("DB_USER", "***********");
-define("DB_PASS", "************");
-define("DB_NAME", "*************");
+define("DB_SERVER", "localhost");
+define("DB_USER", "root");
+define("DB_PASS", "cmpfiles");
+define("DB_NAME", "streaming");
 
 /**
  * Database Table Constants - these constants

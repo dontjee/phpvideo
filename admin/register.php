@@ -88,8 +88,9 @@ else{
 	   /* Registration was successful */
 	   if($_SESSION['regsuccess']){
 		  echo "<h1>Registered!</h1>";
-		  echo "<p>Thank you <b>".$session->username."</b>, the information has been added to the database. "
-			  .$_SESSION['reguname']." will receive an email with further details.</p>";
+		  echo "<p>Thank you for registering ".$_SESSION['reguname'].", your account has been created.</p>"
+			  ."<p>You will receive a confirmation email with further details to complete your"
+                          ." registration.</p>";
 	   }
 	   /* Registration failed */
 	   else{
@@ -131,14 +132,14 @@ else{
 						Password:
 				</label>
 				<div class="formfield">
-					<input type="text" name="password" maxlength="30" />
+					<input name="password" maxlength="30" type="password" />
 					<? echo $form->error("password"); ?>
 				</div>
 				<label class="formlabel">
 						Confirm Password:
 				</label>
 				<div class="formfield">
-					<input type="text" name="passworddup" maxlength="30" />
+					<input name="passworddup" maxlength="30" type="password" />
 					<? echo $form->error("passworddup"); ?>
 				</div>
 			</div>

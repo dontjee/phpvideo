@@ -131,9 +131,6 @@ class AdminProcess
          $q = "DELETE FROM ".TBL_PROFESSION." WHERE userid = '$userid'";
          $database->query($q);
          
-         $q = "DELETE FROM ".TBL_PURPOSE." WHERE userid = '$userid'";
-         $database->query($q);
-         
          header("Location: ".$session->referrer);
       }
    }

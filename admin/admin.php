@@ -37,7 +37,7 @@ function displayUsers(){
    /* Display table contents */
    echo "<table align=\"left\" border=\"1\" cellspacing=\"0\" cellpadding=\"3\">\n";
    echo "<tr><td><b>First Name</b></td><td><b>Last Name</b></td><td><b>Userid</b></td>".
-   		"<td><b>Username</b></td><td><b>Level</b></td><td><b>Email</b></td><td><b>Last Active</b></td></tr>\n";
+   		"<td><b>Username</b></td><td><b>Login Count</b></td><td><b>Level</b></td><td><b>Email</b></td><td><b>Last Active</b></td></tr>\n";
    for($i=0; $i<$num_rows; $i++){
    	  $userid  = mysql_result($result,$i,"userid");
       $uname  = mysql_result($result,$i,"username");
@@ -46,13 +46,45 @@ function displayUsers(){
       $time   = mysql_result($result,$i,"timestamp");
 	  $firstname = mysql_result($result,$i,"firstname");
 	  $lastname   = mysql_result($result,$i,"lastname");
+	  $loginCount = mysql_result($result,$i,"logins");
 	  
 	  if( $ulevel == 1 )
 	  	$ulevel = "Regular User";
 	  else if( $ulevel == 9 )
 	  	$ulevel = "Administrator";
 	  
-      echo "<tr><td>$firstname</td><td>$lastname</td><td>$userid</td><td>$uname</td><td>$ulevel</td><td>$email</td><td>$time</td></tr>\n";
+      echo "<tr><td>$firstname</td><td>$lastname</td><td>$userid</td><td>$uname</td><td>$loginCount</td><td>$ulevel</td><td>$email</td><td>$time</td></tr>\n";
+   }
+   echo "</table><br>\n";
+}
+
+/**
+ * displayMostViewed - Displays the videos database table in
+ * a nicely formatted html table.
+ */
+function displayMostViewed(){
+   global $database;
+   $q = "SELECT * FROM videos WHERE filename IS NOT NULL AND filename <> '' ORDER BY hits DESC";
+
+   $result = $database->query($q);
+   /* Error occurred, return given name by default */
+   $num_rows = mysql_numrows($result);
+   if(!$result || ($num_rows < 0)){
+      echo "Error displaying info";
+      return;
+   }
+   if($num_rows == 0){
+      echo "Database table empty";
+      return;
+   }
+   /* Display table contents */
+   echo "<table align=\"left\" border=\"1\" cellspacing=\"0\" cellpadding=\"3\">\n";
+   echo "<tr><td><b>Filename</b></td><td><b>Views</b></td></tr>\n";
+   for($i=0; $i<$num_rows; $i++){
+	  $filename = mysql_result($result,$i,"filename");
+	  $hits   = mysql_result($result,$i,"hits");
+	  
+      echo "<td>$filename</td><td>$hits</td></tr>\n";
    }
    echo "</table><br>\n";
 }
@@ -168,6 +200,22 @@ if($form->num_errors > 0){
 <h3>Users Table Contents:</h3>
 <?
 displayUsers();
+?>
+
+</div>
+<div style="clear:both;"></div>
+<hr />
+
+<?
+/**
+ * Most viewed videos
+ */
+?>
+<div style="margin-left:10px;">
+
+<h3>Viewed videos (sorted by most viewed):</h3>
+<?
+displayMostViewed();
 ?>
 
 </div>

@@ -21,19 +21,15 @@ class Mailer
     * registered user, also supplying the username and
     * password.
     */
-   function sendWelcome($firstname, $lastname, $user, $email, $pass){
+   function sendWelcome($firstname, $lastname, $user, $email, $confirmCode){
       $from = "From: ".EMAIL_FROM_NAME." <".EMAIL_FROM_ADDR.">";
       $subject = "Welcome to the Connected Math Video Streaming Site!";
       $body = $firstname.",\n\n"
              ."Welcome! You've just registered at MSU's Connected Math Video Site "
              ."with the following information:\n\n"
-             ."Username: ".$user."\n"
-             ."Password: ".$pass."\n\n"
-             ."Please login and change your password under 'My Account'. "
-             ."If you ever lose or forget your password, a new "
-             ."password will be generated for you and sent to this "
-             ."email address, if you would like to change your "
-             ."email address you can do so by going to the "
+             ."Username: ".$user."\n\n"
+             ."To Confirm your account please visit this link and log in:\n"
+             ."http://fileserver.connectedmath.msu.edu/cmplogin/confirmuser.php?c=".$confirmCode
              ."My Account page after signing in.\n\n"
 	     ."- Connected Math Team";
 

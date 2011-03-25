@@ -30,8 +30,7 @@ class Mailer
              ."Username: ".$user."\n\n"
              ."To Confirm your account please visit this link and log in:\n"
              ."http://fileserver.connectedmath.msu.edu/cmplogin/confirmuser.php?c=".$confirmCode
-             ."My Account page after signing in.\n\n"
-	     ."- Connected Math Team";
+	     ."\n\n- Connected Math Team";
 
       return mail($email,$subject,$body,$from);
    }

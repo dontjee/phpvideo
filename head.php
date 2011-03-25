@@ -14,13 +14,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title><? echo "$title"; ?></title>
+<link href="http://connectedmath.msu.edu/style.css" rel="stylesheet" type="text/css" />
 <?
 if( isset($extraHeadData) )
 	echo "$extraHeadData";
 ?>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title><? echo "$title"; ?></title>
-<link href="http://connectedmath.msu.edu/style.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -367,7 +367,8 @@ text-decoration:none;
 			echo "<a href=\"/cmplogin/process.php\">Logout</a>";
 		}
 		else{
-			echo "<a href=\"/cmplogin/main.php\">Login</a>";
+			echo "<a href=\"/cmplogin/main.php\">Login</a>&nbsp;&nbsp;";
+			echo "<a href=\"/cmplogin/register.php\">Create an Account</a>";
 		}
 	}
 ?>

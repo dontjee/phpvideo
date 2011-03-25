@@ -389,7 +389,7 @@ class Session
 		  }
 
       //Password error checking 
-      $field = "pass";  //Use field name for password
+      $field = "password";  //Use field name for password
       if(!$subpass || !$subpassdup){
          $form->setError($field, "* Password not entered");
       }
@@ -406,7 +406,7 @@ class Session
          }
          // verify pass and duplicate pass match
          else if($subpass != $subpassdup){
-            $form->setError("passdup", "* Passwords do not match");
+            $form->setError("passworddup", "* Passwords do not match");
          }
          /**
           * Note: I trimmed the password only after I checked the length
@@ -466,7 +466,7 @@ class Session
 				$form->setError($field, "* Work name must use only letters");
 			 }
 		  }
-		  $field = "workcity"; //Use field name for lastname
+		  $field = "institutioncity"; //Use field name for lastname
 		  if(!$subworkcity || strlen($subworkcity = trim($subworkcity)) == 0){
 			 $form->setError($field, "* Work city not entered");
 		  }

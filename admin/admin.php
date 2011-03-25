@@ -19,9 +19,9 @@ include("../include/functions.php");
  */
 function displayUsers(){
    global $database;
-   $q = "SELECT * FROM ".TBL_USERS." JOIN ".TBL_PROFILE." JOIN ".TBL_PROFESSION." JOIN ".TBL_PURPOSE." ON "
+   $q = "SELECT * FROM ".TBL_USERS." JOIN ".TBL_PROFILE." JOIN ".TBL_PROFESSION." ON "
    		.TBL_USERS.".userid = ".TBL_PROFILE.".userid AND ".TBL_USERS.".userid = ".TBL_PROFESSION.".userid"
-   		." AND ".TBL_USERS.".userid = ".TBL_PURPOSE.".userid ORDER BY userlevel DESC,username";
+   		." ORDER BY userlevel DESC,username";
 
    $result = $database->query($q);
    /* Error occurred, return given name by default */

@@ -181,7 +181,7 @@ class MySQLDB
       }else{
          $ulevel = USER_LEVEL;
       }
-      $q = "INSERT INTO ".TBL_USERS." VALUES ( 'NULL', '$username', '$password', '0', $ulevel, '$email', $time, 0, '$confirmCode')";
+      $q = "INSERT INTO ".TBL_USERS." VALUES ( 'NULL', '$username', '$password', '0', $ulevel, '$email', $time, 0, '$confirmCode', 0)";
       //return mysql_query($q, $this->connection);
       
       //if new user was created

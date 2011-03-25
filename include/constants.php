@@ -18,8 +18,8 @@
  */
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
-define("DB_PASS", "cmpfiles");
-define("DB_NAME", "streaming");
+define("DB_PASS", "********");
+define("DB_NAME", "*********");
 
 /**
  * Database Table Constants - these constants

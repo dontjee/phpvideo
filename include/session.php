@@ -210,7 +210,7 @@ class Session
          if($database->addNewFeedback($this->username, $subvidused, $subdates, $subgoal, $sublocation, $subaudience, 
    			$subtime, $sublength, $subvidrole, $subvidhelpful, $subusedyvonne, $subyvonneuseful, $subcontinue)){
 		     
-		    $emails=array("dontjee@gmail.com");
+		    $emails=array("cmp@math.msu.edu");
 	        $mailer->sendFeedback($emails, $this->username, $subvidused, $subdates, $subgoal, $sublocation, $subaudience, 
    				$subtime, $sublength, $subvidrole, $subvidhelpful, $subusedyvonne, $subyvonneuseful, $subcontinue);
 

@@ -36,7 +36,7 @@ function displayUsers(){
    }
    /* Display table contents */
    echo "<table align=\"left\" border=\"1\" cellspacing=\"0\" cellpadding=\"3\">\n";
-   echo "<tr><td><b>First Name</b></td><td><b>Last Name</b></td><td><b>Userid</b></td>".
+   echo "<tr><td><b>First Name</b></td><td><b>Last Name</b></td><td><b>Profession</b></td><td><b>Institution</b></td><td><b>Userid</b></td>".
    		"<td><b>Username</b></td><td><b>Login Count</b></td><td><b>Level</b></td><td><b>Email</b></td><td><b>Last Active</b></td></tr>\n";
    for($i=0; $i<$num_rows; $i++){
    	  $userid  = mysql_result($result,$i,"userid");
@@ -44,16 +44,22 @@ function displayUsers(){
       $ulevel = mysql_result($result,$i,"userlevel");
       $email  = mysql_result($result,$i,"email");
       $time   = mysql_result($result,$i,"timestamp");
+      $time = date('M j Y g:i A', $time);
 	  $firstname = mysql_result($result,$i,"firstname");
 	  $lastname   = mysql_result($result,$i,"lastname");
 	  $loginCount = mysql_result($result,$i,"logins");
+	  $profession = mysql_result($result,$i,"job");
+          $profession = parseJobString($profession);
+	  $work = mysql_result($result,$i,"workname")." - ".
+		  mysql_result($result,$i,"workcity").", ".
+		  mysql_result($result,$i,"workstate");
 	  
 	  if( $ulevel == 1 )
 	  	$ulevel = "Regular User";
 	  else if( $ulevel == 9 )
 	  	$ulevel = "Administrator";
 	  
-      echo "<tr><td>$firstname</td><td>$lastname</td><td>$userid</td><td>$uname</td><td>$loginCount</td><td>$ulevel</td><td>$email</td><td>$time</td></tr>\n";
+      echo "<tr><td>$firstname</td><td>$lastname</td><td>$profession</td><td>$work</td><td>$userid</td><td>$uname</td><td>$loginCount</td><td>$ulevel</td><td>$email</td><td>$time</td></tr>\n";
    }
    echo "</table><br>\n";
 }

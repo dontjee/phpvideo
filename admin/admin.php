@@ -70,7 +70,7 @@ function displayUsers(){
  */
 function displayMostViewed(){
    global $database;
-   $q = "SELECT * FROM videos WHERE filename IS NOT NULL AND filename <> '' ORDER BY hits DESC";
+   $q = "SELECT * FROM videos WHERE filename IS NOT NULL AND pagename IS NOT NULL AND pagename <> '' AND filename <> '' ORDER BY hits DESC";
 
    $result = $database->query($q);
    /* Error occurred, return given name by default */
@@ -87,10 +87,10 @@ function displayMostViewed(){
    echo "<table align=\"left\" border=\"1\" cellspacing=\"0\" cellpadding=\"3\">\n";
    echo "<tr><td><b>Filename</b></td><td><b>Views</b></td></tr>\n";
    for($i=0; $i<$num_rows; $i++){
-	  $filename = mysql_result($result,$i,"filename");
+	  $pagename = mysql_result($result,$i,"pagename");
 	  $hits   = mysql_result($result,$i,"hits");
 	  
-      echo "<td>$filename</td><td>$hits</td></tr>\n";
+      echo "<td>$pagename</td><td>$hits</td></tr>\n";
    }
    echo "</table><br>\n";
 }

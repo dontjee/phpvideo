@@ -103,7 +103,8 @@ DROP TABLE IF EXISTS videos;
 
 CREATE TABLE videos (
   filename varchar(64) NOT NULL PRIMARY KEY,
-  hits int(10) NOT NULL default '1'
+  hits int(10) NOT NULL default '1',
+  pagename varchar(256) NULL
 );
 
 #

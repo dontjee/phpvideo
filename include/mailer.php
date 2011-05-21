@@ -13,6 +13,12 @@
  * Written by: Jpmaster77 a.k.a. The Grandmaster of C++ (GMC)
  * Last Updated: August 19, 2004
  */
+
+/**
+	If you're using a linux server using Postfix, and your server hasn't the host name set to a valid name (because it's behind a firewall in an intranet), it's possible that when sending mails using the mail function, some mail servers reject them. This is because they can't check the return path header. If you want to change the Return-Path used by sendmail init the php.ini and edit the sendmail_path variable to this:
+
+	sendmail_path = "sendmail -t -i -F webmaster@yoursite.com -f webmaster@yoursite.com"
+*/
  
 class Mailer
 {

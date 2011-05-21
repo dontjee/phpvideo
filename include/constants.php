@@ -84,7 +84,7 @@ define("COOKIE_PATH", "/");  //Avaible in whole domain
  * welcome email to newly registered users.
  */
 define("EMAIL_FROM_NAME", "Connected Math Team");
-define("EMAIL_FROM_ADDR", "admin@conectedmath.msu.edu.com");
+define("EMAIL_FROM_ADDR", "cmpadmin@math.msu.edu");
 define("EMAIL_WELCOME", true);
 
 /**
